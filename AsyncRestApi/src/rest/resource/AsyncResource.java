@@ -91,14 +91,19 @@ public class AsyncResource {
 	         }}).toList().subscribe(list -> {
 	        	for(String s : list){
 	        		 try {
-						output.write(s);
-						Thread.sleep(1000);
+						output.write(s+"\r\n");
+						Thread.sleep(100);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	        	}
-	        	
+	        	try {
+					output.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	         });
         // the output will be probably returned even before
         // a first chunk is written by the new thread
